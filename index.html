@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmica Labs Inc. | Future Technology Solutions</title>
+    <meta name="description" content="Official website of Cosmica Labs Inc.">
+    
+    <!-- 引入 Tailwind CSS (样式框架) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 AOS 动画库样式 -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- 引入 Google Fonts (Inter字体) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19', // 深邃蓝黑背景
+                            card: '#151B2B', // 卡片背景
+                            accent: '#6366F1', // 强调色 (Indigo)
+                            glow: '#818CF8', // 发光色
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        /* 隐藏滚动条但保留功能 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        /* 渐变文字类 */
+        .text-gradient {
+            background: linear-gradient(to right, #818CF8, #C084FC);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Modal 内容滚动条 */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- 导航栏 (玻璃拟态效果) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-[#0B0F19]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-2xl font-bold text-white tracking-tight">Cosmica<span class="text-indigo-500">.</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-indigo-400 transition px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="hover:text-indigo-400 transition px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#services" class="hover:text-indigo-400 transition px-3 py-2 rounded-md text-sm font-medium">Expertise</a>
+                        <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-lg shadow-indigo-500/30">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-[#0B0F19] border-b border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#services" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="#contact" class="text-indigo-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (首屏) -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- 背景装饰光斑 -->
+        <div class="absolute top-0 left-1/2 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-blob"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm font-semibold mb-6">
+                    Innovating Since 2026
+                </span>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                    Engineering the <br/>
+                    <span class="text-gradient">Next Generation</span> of Tech
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400">
+                    Cosmica Labs Inc. bridges the gap between intelligent hardware and seamless digital experiences. We build the infrastructure for tomorrow.
+                </p>
+                <div class="mt-10 flex justify-center gap-4">
+                    <a href="#services" class="rounded-full bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all">
+                        View Solutions
+                    </a>
+                    <a href="#about" class="rounded-full bg-white/10 px-8 py-3.5 text-base font-semibold text-white hover:bg-white/20 transition-all border border-white/10">
+                        Who We Are
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (关于我们 - 必须包含合规性描述) -->
+    <section id="about" class="py-24 bg-[#0B0F19]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- 更新后的图片部分 -->
+                <div data-aos="fade-right" class="relative group">
+                    <!-- 背景装饰框 -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl">
+                        <!-- 使用了更稳定的 Unsplash 图源 (现代办公楼/科技感) -->
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Cosmica Labs Headquarters" class="w-full h-full object-cover transform transition duration-700 group-hover:scale-105">
+                        <!-- 图片上的遮罩文字，增加高级感 -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <p class="text-white font-semibold">Innovation Hub</p>
+                            <p class="text-indigo-300 text-xs">Hangzhou, China</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
+                        Bridging Innovation <br>Across Borders
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        <strong>Cosmica Labs Inc.</strong> serves as the premier technology hub for <em>Hangzhou Wenda StarReach Network Technology Co., Ltd.</em> Our mission is to deliver world-class digital products that combine robust engineering with intuitive design.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        From IoT integration to enterprise-grade software architectures, we empower businesses to thrive in a connected world.
+                    </p>
+                    
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                            <div class="text-2xl font-bold text-white">50+</div>
+                            <div class="text-sm text-gray-500">Enterprise Clients</div>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                            <div class="text-2xl font-bold text-white">100%</div>
+                            <div class="text-sm text-gray-500">Project Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (核心业务模块) -->
+    <section id="services" class="py-24 relative bg-[#0F131F]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-base font-semibold leading-7 text-indigo-500">Our Expertise</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">Comprehensive Tech Ecosystem</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Module 1: Intelligent Hardware -->
+                <div data-aos="fade-up" data-aos-delay="0" class="group relative p-8 bg-brand-card rounded-2xl border border-white/5 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-lg bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition">
+                        <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Intelligent Hardware</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        End-to-end IoT solutions including firmware development, embedded systems integration, and smart device prototyping. We make things talk.
+                    </p>
+                </div>
+
+                <!-- Module 2: App Development -->
+                <div data-aos="fade-up" data-aos-delay="100" class="group relative p-8 bg-brand-card rounded-2xl border border-white/5 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition">
+                        <svg class="w-8 h-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">App Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        High-performance iOS and Android applications built with native Swift and React Native. Focusing on intuitive UX and robust architecture.
+                    </p>
+                </div>
+
+                <!-- Module 3: Software Services -->
+                <div data-aos="fade-up" data-aos-delay="200" class="group relative p-8 bg-brand-card rounded-2xl border border-white/5 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-lg bg-purple-500/10 flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition">
+                        <svg class="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Software Services</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Enterprise SaaS solutions, cloud infrastructure management, and data analytics dashboards designed to scale with your business.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (联系方式 - 审核重点) -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">Ready to Collaborate?</h2>
+            
+            <div class="bg-brand-card border border-white/10 rounded-2xl p-8 md:p-12 shadow-2xl relative z-10" data-aos="zoom-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <p class="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-1">Get in touch</p>
+                        <p class="text-white text-lg font-medium mb-1">Support Team</p>
+                        <a href="mailto:support@cosmicalabs.com" class="text-gray-400 hover:text-white transition">support@cosmicalabs.com</a>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-1">Office</p>
+                        <p class="text-white text-lg font-medium mb-1">Hangzhou HQ</p>
+                        <p class="text-gray-400 text-sm">
+                            <!-- 请务必修改为真实地址的英文版 -->
+                            Room 808, Building A, Wenda Tech Park<br>
+                            Xihu District, Hangzhou, China
+                        </p>
+                    </div>
+                    <div class="md:col-span-2 border-t border-white/5 pt-6">
+                        <p class="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-1">Phone</p>
+                        <p class="text-gray-400">+86 571 8888 8888</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-[#080B12] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="text-lg font-bold text-white">Cosmica Labs Inc.</span>
+                <p class="text-xs text-gray-500 mt-2">Empowering Digital Evolution.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center md:justify-end space-x-6 text-sm text-gray-400">
+                <button onclick="openModal('privacy')" class="hover:text-white transition focus:outline-none">Privacy Policy</button>
+                <button onclick="openModal('terms')" class="hover:text-white transition focus:outline-none">Terms of Service</button>
+                <button onclick="openModal('cookies')" class="hover:text-white transition focus:outline-none">Cookie Policy</button>
+            </div>
+            
+            <div class="text-xs text-gray-600 w-full md:w-auto text-center md:text-right mt-4 md:mt-0">
+                &copy; 2026 Cosmica Labs Inc. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (Popups) for Policies -->
+    <!-- Privacy Policy Modal -->
+    <div id="modal-privacy" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeModal('privacy')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="relative inline-block align-bottom bg-[#151B2B] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-white/10">
+                <div class="bg-[#151B2B] px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-gray-300">
+                    <h3 class="text-2xl font-bold text-white mb-4" id="modal-title">Privacy Policy</h3>
+                    <div class="mt-2 text-sm space-y-4 max-h-[60vh] overflow-y-auto modal-content pr-2">
+                        <p>Last updated: January 2026</p>
+                        <p>Cosmica Labs Inc. ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information.</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">1. Information We Collect</h4>
+                        <p>We may collect information you provide directly to us (such as when you contact support) and information collected automatically through our services (such as device type and usage data).</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">2. How We Use Information</h4>
+                        <p>We use the information to provide, maintain, and improve our services, including troubleshooting, data analysis, and system testing.</p>
+
+                        <h4 class="text-white font-semibold mt-4">3. Data Sharing</h4>
+                        <p>We do not sell your personal data. We may share data with service providers who assist our operations, subject to strict confidentiality obligations.</p>
+
+                        <h4 class="text-white font-semibold mt-4">4. Your Rights</h4>
+                        <p>You have the right to access, correct, or delete your personal information. Please contact us at support@cosmicalabs.com for assistance.</p>
+                    </div>
+                </div>
+                <div class="bg-[#0B0F19] px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-white/5">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal('privacy')">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="modal-terms" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeModal('terms')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="relative inline-block align-bottom bg-[#151B2B] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-white/10">
+                <div class="bg-[#151B2B] px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-gray-300">
+                    <h3 class="text-2xl font-bold text-white mb-4">Terms of Service</h3>
+                    <div class="mt-2 text-sm space-y-4 max-h-[60vh] overflow-y-auto modal-content pr-2">
+                        <p>Last updated: January 2026</p>
+                        <p>Please read these Terms of Service ("Terms") carefully before using our website or services.</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">1. Acceptance of Terms</h4>
+                        <p>By accessing or using our services, you agree to be bound by these Terms. If you disagree with any part of the terms, you may not access the service.</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">2. Intellectual Property</h4>
+                        <p>The service and its original content, features, and functionality are and will remain the exclusive property of Cosmica Labs Inc. and its licensors.</p>
+
+                        <h4 class="text-white font-semibold mt-4">3. Limitation of Liability</h4>
+                        <p>In no event shall Cosmica Labs Inc. be liable for any indirect, incidental, special, consequential or punitive damages arising out of your use of our services.</p>
+
+                        <h4 class="text-white font-semibold mt-4">4. Governing Law</h4>
+                        <p>These Terms shall be governed by the laws of China, without regard to its conflict of law provisions.</p>
+                    </div>
+                </div>
+                <div class="bg-[#0B0F19] px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-white/5">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal('terms')">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Policy Modal -->
+    <div id="modal-cookies" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeModal('cookies')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="relative inline-block align-bottom bg-[#151B2B] rounded-xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-white/10">
+                <div class="bg-[#151B2B] px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-gray-300">
+                    <h3 class="text-2xl font-bold text-white mb-4">Cookie Policy</h3>
+                    <div class="mt-2 text-sm space-y-4 max-h-[60vh] overflow-y-auto modal-content pr-2">
+                        <p>Last updated: January 2026</p>
+                        <p>This Cookie Policy explains what cookies are, how we use cookies, and your choices regarding cookies.</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">1. What Are Cookies</h4>
+                        <p>Cookies are small pieces of text sent by your web browser by a website you visit. A cookie file is stored in your web browser and allows the Service or a third-party to recognize you.</p>
+                        
+                        <h4 class="text-white font-semibold mt-4">2. How We Use Cookies</h4>
+                        <p>We use cookies to analyze traffic, remember your preferences, and optimize site performance. We use both session and persistent cookies.</p>
+
+                        <h4 class="text-white font-semibold mt-4">3. Your Choices</h4>
+                        <p>If you'd like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web browser.</p>
+                    </div>
+                </div>
+                <div class="bg-[#0B0F19] px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-white/5">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal('cookies')">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 初始化 AOS 动画库 -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true, // 动画只执行一次
+            offset: 100, // 触发动画的偏移量
+            duration: 800, // 动画持续时间
+            easing: 'ease-out-cubic',
+        });
+
+        // Modal Logic
+        function openModal(type) {
+            document.getElementById('modal-' + type).classList.remove('hidden');
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(type) {
+            document.getElementById('modal-' + type).classList.add('hidden');
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
